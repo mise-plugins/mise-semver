@@ -1,7 +1,7 @@
 [tools]
 semver = "3.4.0"
-shellcheck = "latest"
 lua = "5.4"
+"cargo:stylua" = "latest"
 
 [tasks.test]
 description = "Run plugin tests"
@@ -14,13 +14,16 @@ run = """
 """
 
 [tasks.lint]
-description = "Lint Lua scripts"
+description = "Lint and format check Lua scripts"
 run = """
-  for f in metadata.lua hooks/*.lua; do
-    lua -e "loadfile('$f')" 2>&1 | grep -q "syntax error" && echo "✗ $f has syntax errors" && exit 1 || true
-  done
-  echo "✓ Lint passed"
+  luarocks install luacheck --local 2>/dev/null || true
+  ~/.luarocks/bin/luacheck metadata.lua hooks/
+  stylua --check metadata.lua hooks/
 """
+
+[tasks.format]
+description = "Format Lua scripts"
+run = "stylua metadata.lua hooks/"
 
 [tasks.ci]
 description = "Run all CI checks"

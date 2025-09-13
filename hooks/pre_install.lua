@@ -8,6 +8,6 @@ function PLUGIN:PreInstall(ctx)
     return {
         version = version,
         url = url,
-        note = "Downloading semver " .. version
+        note = "Downloading semver " .. version,
     }
 end

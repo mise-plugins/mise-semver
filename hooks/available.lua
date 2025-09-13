@@ -17,7 +17,7 @@ function PLUGIN:Available(ctx)
     -- Make API request
     local resp, err = http.get({
         url = repo_url,
-        headers = headers
+        headers = headers,
     })
 
     if err ~= nil then
@@ -39,7 +39,7 @@ function PLUGIN:Available(ctx)
         -- Add version to result
         table.insert(result, {
             version = version,
-            note = nil
+            note = nil,
         })
     end
 

@@ -5,5 +5,5 @@ PLUGIN = {
     description = "A semantic versioning (semver) command-line tool",
     author = "mise-plugins",
     updateUrl = "https://github.com/mise-plugins/mise-semver",
-    minRuntimeVersion = "0.2.0"
+    minRuntimeVersion = "0.2.0",
 }

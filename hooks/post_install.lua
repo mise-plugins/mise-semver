@@ -1,9 +1,7 @@
 -- hooks/post_install.lua
 function PLUGIN:PostInstall(ctx)
-    local rootPath = ctx.rootPath
-    local sdkInfo = ctx.sdkInfo['semver']
+    local sdkInfo = ctx.sdkInfo["semver"]
     local path = sdkInfo.path
-    local version = sdkInfo.version
 
     -- Create bin directory if it doesn't exist
     os.execute("mkdir -p " .. path .. "/bin")
