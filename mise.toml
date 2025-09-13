@@ -1,5 +1,5 @@
 [env]
-MISE_USE_VERSIONS = "0"
+MISE_USE_VERSIONS_HOST = "0"
 
 [tools]
 lua = "5.4"
