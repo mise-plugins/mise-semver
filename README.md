@@ -27,6 +27,21 @@ mise use -g semver@3.4.0
 mise use semver@3.4.0
 ```
 
+## Development
+
+This project uses [hk](https://hk.jdx.dev) for pre-commit hooks and linting.
+
+```bash
+# Install pre-commit hooks
+hk install
+
+# Run linting manually
+mise run lint
+
+# Run all CI checks
+mise run ci
+```
+
 ## About semver
 
 semver is a bash utility to manipulate and validate semantic versions. It provides commands to:

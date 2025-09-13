@@ -1,5 +1,5 @@
 -- metadata.lua
-PLUGIN = {
+PLUGIN = { -- luacheck: ignore
     name = "semver",
     version = "1.0.0",
     description = "A semantic versioning (semver) command-line tool",
