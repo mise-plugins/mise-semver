@@ -8,89 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install mise
-        uses: jdx/mise-action@v2
-        with:
-          version: latest
-          install: true
-
-      - name: Install dependencies
-        run: |
-          mise install
-          sudo apt-get update
-          sudo apt-get install -y lua5.4
-
-      - name: Run linter
-        run: mise run lint
-
-  test:
+  ci:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install mise
-        uses: jdx/mise-action@v2
-        with:
-          version: latest
-          install: true
-
-      - name: Install Lua (Ubuntu)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lua5.4
-
-      - name: Install Lua (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          brew install lua
-
-      - name: Run tests
-        run: |
-          mise install
-          mise run test
-
-  integration-test:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        semver-version: ['3.4.0', '3.3.0', '3.2.0']
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install mise
-        uses: jdx/mise-action@v2
-        with:
-          version: latest
-          install: true
-
-      - name: Test plugin installation
-        run: |
-          # Install the plugin from current directory
-          mise plugin install semver .
-
-          # List available versions
-          mise ls-remote semver | head -20
-
-          # Install specific version
-          mise install semver@${{ matrix.semver-version }}
-
-          # Test execution
-          mise exec semver@${{ matrix.semver-version }} -- semver --version
-
-          # Test basic functionality
-          mise exec semver@${{ matrix.semver-version }} -- semver bump major 1.2.3 | grep -q "2.0.0"
-          mise exec semver@${{ matrix.semver-version }} -- semver bump minor 1.2.3 | grep -q "1.3.0"
-          mise exec semver@${{ matrix.semver-version }} -- semver bump patch 1.2.3 | grep -q "1.2.4"
-
-          # Clean up
-          mise plugin uninstall semver
+      - uses: jdx/mise-action@v2
+      - run: mise run ci
