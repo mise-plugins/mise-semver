@@ -5,25 +5,6 @@ MISE_USE_VERSIONS_HOST = "0"
 lua = "5.4"
 stylua = "latest"
 
-[tasks.test]
-description = "Run plugin tests"
-run = """
-  mise plugin uninstall semver 2>/dev/null || true
-  mise plugin link semver .
-  mise cache clear
-  mise install semver@3.4.0
-  mise exec semver@3.4.0 -- semver --version | grep -q '3.4.0'
-  echo "✓ Tests passed"
-"""
-
-[tasks.lint]
-description = "Lint and format check Lua scripts"
-run = """
-  luarocks install luacheck --local 2>/dev/null || true
-  ~/.luarocks/bin/luacheck metadata.lua hooks/
-  stylua --check metadata.lua hooks/
-"""
-
 [tasks.format]
 description = "Format Lua scripts"
 run = "stylua metadata.lua hooks/"

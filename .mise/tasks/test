@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mise plugin uninstall semver 2>/dev/null || true
+mise plugin link semver .
+mise cache clear
+mise install semver@3.4.0
+mise exec semver@3.4.0 -- semver --version | grep -q '3.4.0'
+echo "✓ Tests passed"
