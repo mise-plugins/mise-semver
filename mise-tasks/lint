@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#MISE description="Lint and format check Lua scripts with luacheck and StyLua"
 set -euo pipefail
 
 luarocks install luacheck --local || true

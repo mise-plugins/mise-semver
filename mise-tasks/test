@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#MISE description="Run plugin tests - install and verify semver functionality"
 set -euo pipefail
 
 mise plugin link --force semver .
