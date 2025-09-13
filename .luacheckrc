@@ -1,8 +1,8 @@
 -- .luacheckrc configuration for mise-semver plugin
 
--- Globals defined by the vfox plugin system
+-- Globals defined by the vfox plugin system  
 globals = {
-    "PLUGIN"
+    "PLUGIN",
 }
 
 -- Read-only globals from vfox environment
@@ -32,8 +32,9 @@ read_globals = {
 -- Ignore line length warnings
 max_line_length = false
 
--- Ignore unused arguments in hook functions
+-- Ignore unused arguments in hook functions and unused globals
 unused_args = false
+unused = false
 
--- Allow trailing whitespace (can be auto-fixed)
+-- Allow defined top-level variables and trailing whitespace
 allow_defined_top = true
