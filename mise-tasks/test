@@ -4,5 +4,14 @@ set -euo pipefail
 mise plugin link --force semver .
 mise cache clear
 mise install semver@3.4.0
-mise exec semver@3.4.0 -- semver --version | grep -q '3.4.0'
-echo "✓ Tests passed"
+
+# Capture and display the output while also verifying it
+output=$(mise exec semver@3.4.0 -- semver --version)
+echo "semver output: $output"
+
+if echo "$output" | grep -q '3.4.0'; then
+    echo "✓ Tests passed"
+else
+    echo "✗ Test failed: expected version 3.4.0"
+    exit 1
+fi
