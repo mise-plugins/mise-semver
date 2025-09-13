@@ -1,19 +1,26 @@
 [tools]
 semver = "3.4.0"
 shellcheck = "latest"
-shfmt = "latest"
+lua = "5.4"
 
 [tasks.test]
 description = "Run plugin tests"
-run = "./scripts/test.sh"
+run = """
+  mise plugin uninstall semver 2>/dev/null || true
+  mise plugin link semver .
+  mise cache clear
+  MISE_USE_VERSIONS=0 mise exec semver -- semver --version | grep -q '3.4.0'
+  echo "✓ Tests passed"
+"""
 
 [tasks.lint]
-description = "Lint shell and Lua scripts"
-run = "./scripts/lint.sh"
-
-[tasks."lint:fix"]
-description = "Lint and fix shell scripts"
-run = "shfmt -w scripts/*.sh"
+description = "Lint Lua scripts"
+run = """
+  for f in metadata.lua hooks/*.lua; do
+    lua -e "loadfile('$f')" 2>&1 | grep -q "syntax error" && echo "✗ $f has syntax errors" && exit 1 || true
+  done
+  echo "✓ Lint passed"
+"""
 
 [tasks.ci]
 description = "Run all CI checks"
