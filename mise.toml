@@ -1,5 +1,7 @@
+[env]
+MISE_USE_VERSIONS = "0"
+
 [tools]
-semver = "3.4.0"
 lua = "5.4"
 stylua = "latest"
 
@@ -9,7 +11,8 @@ run = """
   mise plugin uninstall semver 2>/dev/null || true
   mise plugin link semver .
   mise cache clear
-  MISE_USE_VERSIONS=0 mise exec semver -- semver --version | grep -q '3.4.0'
+  mise install semver@3.4.0
+  mise exec semver@3.4.0 -- semver --version | grep -q '3.4.0'
   echo "✓ Tests passed"
 """
 
