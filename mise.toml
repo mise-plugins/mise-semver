@@ -1,2 +1,20 @@
 [tools]
 semver = "3.4.0"
+shellcheck = "latest"
+shfmt = "latest"
+
+[tasks.test]
+description = "Run plugin tests"
+run = "./scripts/test.sh"
+
+[tasks.lint]
+description = "Lint shell and Lua scripts"
+run = "./scripts/lint.sh"
+
+[tasks."lint:fix"]
+description = "Lint and fix shell scripts"
+run = "shfmt -w scripts/*.sh"
+
+[tasks.ci]
+description = "Run all CI checks"
+depends = ["lint", "test"]
