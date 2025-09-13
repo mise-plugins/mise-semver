@@ -5,6 +5,7 @@ MISE_USE_VERSIONS_HOST = "0"
 actionlint = "1"
 hk = "1"
 lua = "5.4"
+pkl = "latest"
 stylua = "2"
 
 [tasks.format]
