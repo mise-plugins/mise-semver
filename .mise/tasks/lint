@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-luarocks install luacheck --local 2>/dev/null || true
+luarocks install luacheck --local || true
 ~/.luarocks/bin/luacheck metadata.lua hooks/
 stylua --check metadata.lua hooks/
